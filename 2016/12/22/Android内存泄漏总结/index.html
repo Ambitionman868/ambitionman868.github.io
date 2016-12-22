@@ -3,18 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>hello | Hello 小颜</title>
+  <title>Android 内存泄漏总结 | Hello 小颜</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="你好这是我的 hello  world">
+  <meta name="description" content="Android 内存泄漏总结内存管理的目的就是让我们在开发中怎么有效的避免我们的应用出现内存泄漏的问题。内存泄漏大家都不陌生了，简单粗俗的讲，就是该被释放的对象没有释放，一直被某个或某些实例所持有却不再被使用导致 GC 不能回收。最近自己阅读了大量相关的文档资料，打算做个 总结 沉淀下来跟大家一起分享和学习，也给自己一个警示，以后 coding 时怎么避免这些情况，提高应用的体验和质量。
+我会从">
 <meta property="og:type" content="article">
-<meta property="og:title" content="hello">
-<meta property="og:url" content="http://yoursite.com/2016/12/22/hello/index.html">
+<meta property="og:title" content="Android 内存泄漏总结">
+<meta property="og:url" content="http://yoursite.com/2016/12/22/Android内存泄漏总结/index.html">
 <meta property="og:site_name" content="Hello 小颜">
-<meta property="og:description" content="你好这是我的 hello  world">
-<meta property="og:updated_time" content="2016-12-22T04:32:03.733Z">
+<meta property="og:description" content="Android 内存泄漏总结内存管理的目的就是让我们在开发中怎么有效的避免我们的应用出现内存泄漏的问题。内存泄漏大家都不陌生了，简单粗俗的讲，就是该被释放的对象没有释放，一直被某个或某些实例所持有却不再被使用导致 GC 不能回收。最近自己阅读了大量相关的文档资料，打算做个 总结 沉淀下来跟大家一起分享和学习，也给自己一个警示，以后 coding 时怎么避免这些情况，提高应用的体验和质量。
+我会从">
+<meta property="og:updated_time" content="2016-12-22T09:21:34.849Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="hello">
-<meta name="twitter:description" content="你好这是我的 hello  world">
+<meta name="twitter:title" content="Android 内存泄漏总结">
+<meta name="twitter:description" content="Android 内存泄漏总结内存管理的目的就是让我们在开发中怎么有效的避免我们的应用出现内存泄漏的问题。内存泄漏大家都不陌生了，简单粗俗的讲，就是该被释放的对象没有释放，一直被某个或某些实例所持有却不再被使用导致 GC 不能回收。最近自己阅读了大量相关的文档资料，打算做个 总结 沉淀下来跟大家一起分享和学习，也给自己一个警示，以后 coding 时怎么避免这些情况，提高应用的体验和质量。
+我会从">
   
     <link rel="alternate" href="/atom.xml" title="Hello 小颜" type="application/atom+xml">
   
@@ -67,10 +70,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-hello" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Android内存泄漏总结" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/12/22/hello/" class="article-date">
-  <time datetime="2016-12-22T04:29:32.000Z" itemprop="datePublished">2016-12-22</time>
+    <a href="/2016/12/22/Android内存泄漏总结/" class="article-date">
+  <time datetime="2016-12-22T09:29:32.000Z" itemprop="datePublished">2016-12-22</time>
 </a>
     
   </div>
@@ -81,7 +84,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      hello
+      Android 内存泄漏总结
     </h1>
   
 
@@ -89,11 +92,13 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h4 id="你好这是我的-hello-world"><a href="#你好这是我的-hello-world" class="headerlink" title="你好这是我的 hello  world"></a>你好这是我的 hello  world</h4>
+        <h1 id="Android-内存泄漏总结"><a href="#Android-内存泄漏总结" class="headerlink" title="Android 内存泄漏总结"></a>Android 内存泄漏总结</h1><p>内存管理的目的就是让我们在开发中怎么有效的避免我们的应用出现内存泄漏的问题。内存泄漏大家都不陌生了，简单粗俗的讲，就是该被释放的对象没有释放，一直被某个或某些实例所持有却不再被使用导致 GC 不能回收。最近自己阅读了大量相关的文档资料，打算做个 总结 沉淀下来跟大家一起分享和学习，也给自己一个警示，以后 coding 时怎么避免这些情况，提高应用的体验和质量。</p>
+<p>我会从 java 内存泄漏的基础知识开始，并通过具体例子来说明 Android 引起内存泄漏的各种原因，以及如何利用工具来分析应用内存泄漏，最后再做总结。</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/12/22/hello/" data-id="cix05isqy0001jwks0uhbkgzz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/12/22/Android内存泄漏总结/" data-id="cix05isqu0000jwks27f2hew6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -102,19 +107,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/12/22/Android内存泄漏总结/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Android 内存泄漏总结
-        
-      </div>
-    </a>
   
-  
-    <a href="/2016/12/22/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/12/22/hello/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Hello World</div>
+      <div class="article-nav-title">hello</div>
     </a>
   
 </nav>
