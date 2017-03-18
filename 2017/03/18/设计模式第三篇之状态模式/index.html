@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>设计模式第三篇之状态模式 | Hello 键盘</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="什么是状态模式？&amp;emsp;&amp;emsp;状态模式顾名思义就是在不同状态下做不同的事情，行为是由状态来决定的。当一个对象的内部状态改变时，其行为跟着改变。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式第三篇之状态模式">
+<meta property="og:url" content="http://yoursite.com/2017/03/18/设计模式第三篇之状态模式/index.html">
+<meta property="og:site_name" content="Hello 键盘">
+<meta property="og:description" content="什么是状态模式？&amp;emsp;&amp;emsp;状态模式顾名思义就是在不同状态下做不同的事情，行为是由状态来决定的。当一个对象的内部状态改变时，其行为跟着改变。">
+<meta property="og:updated_time" content="2017-03-18T09:33:11.522Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="设计模式第三篇之状态模式">
+<meta name="twitter:description" content="什么是状态模式？&amp;emsp;&amp;emsp;状态模式顾名思义就是在不同状态下做不同的事情，行为是由状态来决定的。当一个对象的内部状态改变时，其行为跟着改变。">
+  
+    <link rel="alternate" href="/atom.xml" title="Hello 键盘" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hello 键盘</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">越努力 越幸运</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-设计模式第三篇之状态模式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/18/设计模式第三篇之状态模式/" class="article-date">
+  <time datetime="2017-03-18T02:38:36.000Z" itemprop="datePublished">2017-03-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      设计模式第三篇之状态模式
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="什么是状态模式？"><a href="#什么是状态模式？" class="headerlink" title="什么是状态模式？"></a>什么是状态模式？</h3><p>&emsp;&emsp;状态模式顾名思义就是在不同状态下做不同的事情，行为是由状态来决定的。当一个对象的内部状态改变时，其行为跟着改变。</p>
+<a id="more"></a>
+<h3 id="状态模式的使用场景及其优点"><a href="#状态模式的使用场景及其优点" class="headerlink" title="状态模式的使用场景及其优点"></a>状态模式的使用场景及其优点</h3><p>&emsp;&emsp;(1)一个对象的行为在运行时，随着状态的改变而改变。</p>
+<p>&emsp;&emsp;(2)本来的代码中包含很多条件判断语句是跟状态有关系的，比如 if-else、switch-case。</p>
+<p>&emsp;&emsp;状态模式可以将每个条件分支放入一个独立的类中，在类中根据自身的情况做出行为处理，并且不需要依赖其他的状态。</p>
+<h3 id="主要几个角色分析"><a href="#主要几个角色分析" class="headerlink" title="主要几个角色分析"></a>主要几个角色分析</h3><p>&emsp;&emsp;首先我们应该分析一下前面提到的在不同的状态下做不同的事情，那么它就应该是通过行为来做处理。即首先要确定行为方式：</p>
+<p>&emsp;&emsp;(1)State：状态接口或者状态抽象类，定义一个或者多个状态接口表示该状态下的行为方式。</p>
+<p>&emsp;&emsp;(2)ConcreteStateA、ConcreteStateB：具体状态类，每个具体的状态类实现抽象State中定义的接口，从而达到不同状态下有不同的行为。</p>
+<p>&emsp;&emsp;(3)Controller：最后总得需要一个管理类来统一管理这些State子类的实例，这个实例表示对象的当前状态。</p>
+<h3 id="举例说明"><a href="#举例说明" class="headerlink" title="举例说明"></a>举例说明</h3><p>&emsp;&emsp;一般在开发APP的过程中都会碰到登录跟未登录的情况做不同的操作，那么问题来了，是不是经常要做是否已登录的判断，就拿我自己开发的APP来说比如点赞、收藏、评论之类的功能都是需要登录后才可以用的，不然都是跳转到登录页面让用户登录后再做处理。作为一个初学者的我刚开始肯定是这样实现功能</p>
+<pre><code>//点赞行为
+private void toLike(){
+    if (登录情况下) {
+        //去点赞操作
+    }else {
+        //跳转到登录页面
+    }
+}
+
+//收藏行为
+private void toCollect(){
+    if (登录情况下) {
+        //去收藏操作
+    }else {
+        //跳转到登录页面
+    }
+}
+
+//评论行为
+private void toComment(){
+    if (登录情况下) {
+        //去评论操作
+    }else {
+        //跳转到登录页面
+    }
+}
+</code></pre><p>这样咋一看好像也没啥问题对吧？然而这个只是你在这一个地方这样写的代码，那么问题来了，要是这个APP很多个地方都要用到怎么办？总不能复制黏贴复制黏贴…到每个地方吧？再或者某天产品说要加个权限判断，只有评论权限才可以去评论，那不是蛋疼了，你不是要每个评论的地方都要加上判断，这时候心里一万个曹尼玛奔腾而过，当初写代码的坑还是要自己来填。下面状态模式就派上用场了</p>
+<pre><code>//定义一个状态接口包含点赞、收藏、评论等行为方式
+public interface State {
+
+    void toLike();
+
+    void toCollect();
+
+    void toCommment();
+}
+</code></pre><p>下面是两个实现类</p>
+<pre><code>//已经登录的情况的实现类
+public class LoginedState implements State {
+    @Override
+    public void toLike() {
+        //去点赞
+    }
+
+    @Override
+    public void toCollect() {
+        //去收藏
+    }
+
+    @Override
+    public void toCommment() {
+        //去评论
+    }
+}
+
+
+
+//没有登录的情况
+public class NotLoginState implements State {
+    @Override
+    public void toLike() {
+        //去登录
+    }
+
+    @Override
+    public void toCollect() {
+        //去登录
+    }
+
+    @Override
+    public void toCommment() {
+        //去登录
+    }
+}
+</code></pre><p>下面需要写一个状态管理类    </p>
+<pre><code>public interface Controller {
+
+    void loginedState();
+
+    void notLoginState();
+
+    void offLineState();//暂时不管，后续介绍会用到
+
+}
+
+
+
+public class LoginController implements Controller {
+
+
+    private LoginedState mLoginedState = new LoginedState();
+
+    private NotLoginState mNotLoginState = new NotLoginState();
+
+    //暂时不管，后续介绍会用到
+    private OffLineState mOffLineState = new OffLineState();
+
+    private State mState;
+
+    public void setState(State state) {
+        mState = state;
+    }
+
+    @Override
+    public void loginedState() {
+        setState(mLoginedState);
+    }
+
+    public void notLoginState() {
+        setState(mNotLoginState);
+    }
+
+    //暂时不管，后续介绍会用到
+    @Override
+    public void offLineState() {
+        setState(mOffLineState);
+    }
+
+    public void toLike() {
+        //去点赞
+        mState.toLike();
+    }
+
+    public void toCollect() {
+        //去收藏
+        mState.toCollect();
+    }
+
+    public void toCommment() {
+        //去评论
+        mState.toCommment();
+    }
+}
+</code></pre><p>好了，大概的解决思路就如上所示，这时你可能有疑问，这一下子代码变的这么多了，好像也没什么优势可以体现出来，别着急，看我继续介绍：</p>
+<p>&emsp;&emsp;随着产品的迭代，提出了新的需求，我们的APP出了一种离线的状态，介于登录跟未登录的情况之间，这个离线状态有什么不一样呢？离线状态是指登录后超过规定的时间（比如30天）没有重新登录，就自动转为离线状态。离线状态情况下在APP本地保存了账号、密码，去重新登录的时候不需要重新输入账号密码，直接调用接口就可以了，不需要跳转到登录页面，而正常的登录是需要跳转到登录页面手动输入账号密码的，这就是区别。如果是传统的做法，那么是不是要在本来if-else的基础上再添加一个分支，而按照我们现在的写法可以这样实现，我们新建一个离线状态类实现State接口：</p>
+<pre><code>public class OffLineState implements State {
+    @Override
+    public void toLike() {
+
+        //在登录成功后去直接调用点赞的接口
+        toLogin(username, password, new LoginListener() {
+            @Override
+            public void loginSuccess() {
+                //点赞
+            }
+
+            @Override
+            public void loginFailed() {
+
+            }
+        });
+    }
+
+    @Override
+    public void toCollect() {
+
+        //在登录成功后去直接调用收藏的接口
+        toLogin(username, password, new LoginListener() {
+            @Override
+            public void loginSuccess() {
+                //收藏
+            }
+
+            @Override
+            public void loginFailed() {
+
+            }
+        });
+    }
+
+    @Override
+    public void toCommment() {
+
+        //在登录成功后去直接跳转到评论页面
+        toLogin(username, password, new LoginListener() {
+            @Override
+            public void loginSuccess() {
+                //评论
+            }
+
+            @Override
+            public void loginFailed() {
+
+            }
+        });
+    }
+
+    private void toLogin(String userName, String password, LoginListener loginListener){
+        //调用登录的api接口
+    }
+
+
+    private interface LoginListener {
+
+        void loginSuccess();
+
+        void loginFailed();
+    }
+}
+</code></pre><p>&emsp;&emsp;同样的步骤，将离线状态类添加到状态控制类中，这时候你可能才会体会到状态模式的优势了，如果你还感受不到，那么再举例说明，假设后续产品再提出了隐身、忙碌、请勿打扰的状态，你是不是只要新建状态类实现State接口就OK了，总不至于一直添加if-else来解决这个问题吧，首先if-else添加多了不利于维护，而且对于其他人来说也是很不好理解，修改起来也是麻烦事。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/18/设计模式第三篇之状态模式/" data-id="cj0f1wgim00004kkshpe5cdqo" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/02/14/设计模式第二篇之享元模式/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">设计模式第二篇之享元模式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/18/设计模式第三篇之状态模式/">设计模式第三篇之状态模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/14/设计模式第二篇之享元模式/">设计模式第二篇之享元模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/03/单例模式/">设计模式第一篇之单例模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/04/2017初步计划/">2017初步计划</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/22/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Ambition<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
