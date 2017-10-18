@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>设计模式第五篇之策略模式 | Hello 键盘</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="什么是策略模式？策略模式是指对一系列的算法定义，并将每一个算法封装起来，而且使它们还可以相互替换。策略模式让算法独立于使用它的客户而独立变化。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式第五篇之策略模式">
+<meta property="og:url" content="https://www.jianpan666.cn/2017/04/16/设计模式第五篇之策略模式/index.html">
+<meta property="og:site_name" content="Hello 键盘">
+<meta property="og:description" content="什么是策略模式？策略模式是指对一系列的算法定义，并将每一个算法封装起来，而且使它们还可以相互替换。策略模式让算法独立于使用它的客户而独立变化。">
+<meta property="og:updated_time" content="2017-10-18T03:42:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="设计模式第五篇之策略模式">
+<meta name="twitter:description" content="什么是策略模式？策略模式是指对一系列的算法定义，并将每一个算法封装起来，而且使它们还可以相互替换。策略模式让算法独立于使用它的客户而独立变化。">
+  
+    <link rel="alternate" href="/atom.xml" title="Hello 键盘" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hello 键盘</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">越努力 越幸运</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://www.jianpan666.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-设计模式第五篇之策略模式" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/16/设计模式第五篇之策略模式/" class="article-date">
+  <time datetime="2017-04-16T07:53:08.000Z" itemprop="datePublished">2017-04-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      设计模式第五篇之策略模式
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="什么是策略模式？"><a href="#什么是策略模式？" class="headerlink" title="什么是策略模式？"></a>什么是策略模式？</h3><p>策略模式是指对一系列的算法定义，并将每一个算法封装起来，而且使它们还可以相互替换。策略模式让算法独立于使用它的客户而独立变化。</p>
+<a id="more"></a>
+<h3 id="策略模式的应用场景以及优点："><a href="#策略模式的应用场景以及优点：" class="headerlink" title="策略模式的应用场景以及优点："></a>策略模式的应用场景以及优点：</h3><p>策略模式的优点有：策略模式提供了管理相关的算法族的办法、策略模式提供了可以替换继承关系的办法、使用策略模式可以避免使用多重条件转移语句。</p>
+<p>#####应用场景：</p>
+<ol>
+<li>多个类只区别在表现行为不同，可以使用Strategy模式，在运行时动态选择具体要执行的行为。</li>
+<li>需要在不同情况下使用不同的策略(算法)，或者策略还可能在未来用其它方式来实现。</li>
+<li>对客户隐藏具体策略(算法)的实现细节，彼此完全独立。</li>
+</ol>
+<p>###主要几个角色分析：</p>
+<ol>
+<li>Strategy—抽象策略角色： 策略类，通常由一个接口或者抽象类实现。</li>
+<li>ConcreteStrategy—具体策略角色：包装了相关的算法和行为。</li>
+<li>Context—环境角色：持有一个策略类的引用，最终给客户端调用。</li>
+</ol>
+<h3 id="用例剖析"><a href="#用例剖析" class="headerlink" title="用例剖析"></a>用例剖析</h3><p>由于笔者是在厦门这边上班住在岛外，以笔者本人的生活习惯举例说明。</p>
+<p>平时上班要是没有赶上公司班车，可以选择的士，快车，顺风车，公交，或者是BRT+转公交等出行方式上班。那么问题来了，不同的出行方式所花费的时间跟费用也是不一样的，那么换作程序计算要怎么计算呢？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TrafficCalculate</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> COMPANY_BUS = <span class="number">1</span>;   <span class="comment">//公司班车</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> COMMON_BUS = <span class="number">2</span>;    <span class="comment">//公交</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TAXI = <span class="number">3</span>;          <span class="comment">//的士</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> KUAI_CHE = <span class="number">4</span>;      <span class="comment">//快车</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> BRT = <span class="number">5</span>;           <span class="comment">//BRT</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">calculatePrice</span><span class="params">(<span class="keyword">int</span> km, <span class="keyword">int</span> type)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (type == COMPANY_BUS) &#123;</div><div class="line">            <span class="keyword">return</span> commonBusPrice(km);</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (type == COMMON_BUS) &#123;</div><div class="line">            <span class="keyword">return</span> commonBusPrice(km);</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (km == TAXI) &#123;</div><div class="line">            <span class="keyword">return</span> taxiPrice(km);</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (type == KUAI_CHE) &#123;</div><div class="line">            <span class="keyword">return</span> kuaichePrice(km);</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (type == BRT) &#123;</div><div class="line">            <span class="keyword">return</span> BRTprice(km);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//公司班车免费</span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">companyBusPrice</span><span class="params">(<span class="keyword">int</span> km)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//进岛公交全程2块钱</span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">commonBusPrice</span><span class="params">(<span class="keyword">int</span> km)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">2</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//为10元/3公里，即起步里程3公里以后，每公里运价为2元;</span></div><div class="line">    <span class="comment">//单趟营运超过8公里以上的部分，加收50%的回空补贴;</span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">double</span> <span class="title">taxiPrice</span><span class="params">(<span class="keyword">int</span> km)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> step = <span class="number">2</span>;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (km &lt;= <span class="number">3</span>) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="number">10</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (km &gt; <span class="number">3</span> &amp;&amp; km &lt;= <span class="number">8</span>) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="number">10</span> + (km - <span class="number">3</span>) * step;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (km &gt; <span class="number">8</span>) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="number">10</span> + (<span class="number">8</span> - <span class="number">3</span>) * step + (km - <span class="number">8</span>) * step * (<span class="number">1</span> + <span class="number">0.5</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="number">10</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//快车比的士价格便宜一些，而且一般会有优惠券(假设3块)</span></div><div class="line">    <span class="comment">//假设为以下计算方式</span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">double</span> <span class="title">kuaichePrice</span><span class="params">(<span class="keyword">int</span> km)</span> </span>&#123;</div><div class="line">        <span class="keyword">double</span> step = <span class="number">1.8</span>;</div><div class="line">        <span class="keyword">double</span> onSale = <span class="number">3</span>;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (km &lt;= <span class="number">3</span>) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="number">9</span> - onSale;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (km &gt; <span class="number">3</span> &amp;&amp; km &lt;= <span class="number">8</span>) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="number">10</span> + (km - <span class="number">3</span>) * step - onSale;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (km &gt; <span class="number">8</span>) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="number">10</span> + (<span class="number">8</span> - <span class="number">3</span>) * step + (km - <span class="number">8</span>) * step * (<span class="number">1</span> + <span class="number">0.5</span>) - onSale;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="number">9</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//起步3公里以内1块  每1公里0.1块，不足1公里按1公里计价</span></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">double</span> <span class="title">BRTprice</span><span class="params">(<span class="keyword">int</span> km)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (km &lt;= <span class="number">3</span>) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (km &gt; <span class="number">3</span>) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="number">1</span> + (km - <span class="number">3</span>) * <span class="number">0.1</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这个if else有没看花眼，而且我还可以坐BRT+公交、顺风车等出行方式，这要是要加上去计算的话，那我肯定就手动复制if else接在后面写，然后修改，都知道手动复制代码很容易出错，而且这样不断的堆砌代码会导致越来越臃肿，而且这只是举例很简单的计算方式，那要是实际用途中计算方式较为复杂，也会导致这个类的代码很庞大，难以维护，我们解决这类问题的方式就是通过应用策略模式来解决。</p>
+<p>#####1. 我们定义一个计算价格的策略接口CalculateStrategy</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">CalculateStrategy</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">//计算价格的方法</span></div><div class="line">    <span class="function"><span class="keyword">double</span> <span class="title">calculatePrice</span><span class="params">(<span class="keyword">int</span> km)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>对于每一种出行方式我们都单独一个策略了实现CalculateStrategy接口。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//的士价格策略</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TaxiStrategy</span> <span class="keyword">implements</span> <span class="title">CalculateStrategy</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">calculatePrice</span><span class="params">(<span class="keyword">int</span> km)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> step = <span class="number">2</span>;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (km &lt;= <span class="number">3</span>) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="number">10</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (km &gt; <span class="number">3</span> &amp;&amp; km &lt;= <span class="number">8</span>) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="number">10</span> + (km - <span class="number">3</span>) * step;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (km &gt; <span class="number">8</span>) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="number">10</span> + (<span class="number">8</span> - <span class="number">3</span>) * step + (km - <span class="number">8</span>) * step * (<span class="number">1</span> + <span class="number">0.5</span>);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="number">10</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//快车价格策略</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">KuaiCheStrategy</span> <span class="keyword">implements</span> <span class="title">CalculateStrategy</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">calculatePrice</span><span class="params">(<span class="keyword">int</span> km)</span> </span>&#123;</div><div class="line">        <span class="keyword">double</span> step = <span class="number">1.8</span>;</div><div class="line">        <span class="keyword">double</span> onSale = <span class="number">3</span>;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (km &lt;= <span class="number">3</span>) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="number">9</span> - onSale;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (km &gt; <span class="number">3</span> &amp;&amp; km &lt;= <span class="number">8</span>) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="number">10</span> + (km - <span class="number">3</span>) * step - onSale;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (km &gt; <span class="number">8</span>) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="number">10</span> + (<span class="number">8</span> - <span class="number">3</span>) * step + (km - <span class="number">8</span>) * step * (<span class="number">1</span> + <span class="number">0.5</span>) - onSale;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="number">9</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//BRT价格策略</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BRTStrategy</span> <span class="keyword">implements</span> <span class="title">CalculateStrategy</span> </span>&#123;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">calculatePrice</span><span class="params">(<span class="keyword">int</span> km)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (km &lt;= <span class="number">3</span>) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (km &gt; <span class="number">3</span>) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="number">1</span> + (km - <span class="number">3</span>) * <span class="number">0.1</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>#####2.编写一个环境类，通过传进来不同的策略类来调用不同策略的计算方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TrafficCalculator</span> </span>&#123;</div><div class="line">  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line"></div><div class="line">        TrafficCalculator trafficCalculator = <span class="keyword">new</span> TrafficCalculator();</div><div class="line">        <span class="comment">//的士策略类</span></div><div class="line">        trafficCalculator.setCalculateStrategy(<span class="keyword">new</span> TaxiStrategy());</div><div class="line">        <span class="comment">//计算价格</span></div><div class="line">        trafficCalculator.calculatePrice(<span class="number">20</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> CalculateStrategy mCalculateStrategy;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCalculateStrategy</span><span class="params">(CalculateStrategy calculateStrategy)</span> </span>&#123;</div><div class="line">        mCalculateStrategy = calculateStrategy;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">calculatePrice</span><span class="params">(<span class="keyword">int</span> km)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (mCalculateStrategy != <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">return</span> mCalculateStrategy.calculatePrice(km);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>坐BRT太拥挤了，打的跟快车又太贵了，不能太经常坐啊，那么有没有既舒适又实惠的出行方式，当然是选择顺风车啦。同样的，新建一个顺风车策略类实现CalculateStrategy接口就可以了，是不是很方便呢？</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>由以上分析可以明显看出来。前者是通过if else 来实现，类型单一，实现起来较为简单。但是逻辑较为复杂，代码臃肿，难以维护。后者是通过实现策略接口，通过不同的策略做替换，简化逻辑，方便扩展，适用了较为复杂的逻辑业务。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.jianpan666.cn/2017/04/16/设计模式第五篇之策略模式/" data-id="cj8whnysg000452yzwqtoethm" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/08/06/临时性内存泄露分析/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          Handler临时性内存泄露分析
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/03/19/设计模式第四篇之建造者模式/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">设计模式第四篇之建造者模式</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+ 
+
+
+
+
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-设计模式第五篇之策略模式" data-title="设计模式第五篇之策略模式" data-url="https://www.jianpan666.cn/2017/04/16/设计模式第五篇之策略模式/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'ambitionman868'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';
+        ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/08/06/临时性内存泄露分析/">Handler临时性内存泄露分析</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/16/设计模式第五篇之策略模式/">设计模式第五篇之策略模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/19/设计模式第四篇之建造者模式/">设计模式第四篇之建造者模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/18/设计模式第三篇之状态模式/">设计模式第三篇之状态模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/02/14/设计模式第二篇之享元模式/">设计模式第二篇之享元模式</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Jianpan<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
