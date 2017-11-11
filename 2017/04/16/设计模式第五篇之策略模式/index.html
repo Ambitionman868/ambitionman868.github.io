@@ -11,10 +11,12 @@
 <meta property="og:url" content="https://www.jianpan666.cn/2017/04/16/设计模式第五篇之策略模式/index.html">
 <meta property="og:site_name" content="Hello 键盘">
 <meta property="og:description" content="什么是策略模式？策略模式是指对一系列的算法定义，并将每一个算法封装起来，而且使它们还可以相互替换。策略模式让算法独立于使用它的客户而独立变化。">
-<meta property="og:updated_time" content="2017-10-18T03:46:47.000Z">
+<meta property="og:image" content="https://www.jianpan666.cn/../image/wechat.jpg">
+<meta property="og:updated_time" content="2017-10-18T06:44:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式第五篇之策略模式">
 <meta name="twitter:description" content="什么是策略模式？策略模式是指对一系列的算法定义，并将每一个算法封装起来，而且使它们还可以相互替换。策略模式让算法独立于使用它的客户而独立变化。">
+<meta name="twitter:image" content="https://www.jianpan666.cn/../image/wechat.jpg">
   
     <link rel="alternate" href="/atom.xml" title="Hello 键盘" type="application/atom+xml">
   
@@ -114,11 +116,13 @@
 <h5 id="2-编写一个环境类，通过传进来不同的策略类来调用不同策略的计算方法"><a href="#2-编写一个环境类，通过传进来不同的策略类来调用不同策略的计算方法" class="headerlink" title="2.编写一个环境类，通过传进来不同的策略类来调用不同策略的计算方法"></a>2.编写一个环境类，通过传进来不同的策略类来调用不同策略的计算方法</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TrafficCalculator</span> </span>&#123;</div><div class="line">  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line"></div><div class="line">        TrafficCalculator trafficCalculator = <span class="keyword">new</span> TrafficCalculator();</div><div class="line">        <span class="comment">//的士策略类</span></div><div class="line">        trafficCalculator.setCalculateStrategy(<span class="keyword">new</span> TaxiStrategy());</div><div class="line">        <span class="comment">//计算价格</span></div><div class="line">        trafficCalculator.calculatePrice(<span class="number">20</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> CalculateStrategy mCalculateStrategy;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setCalculateStrategy</span><span class="params">(CalculateStrategy calculateStrategy)</span> </span>&#123;</div><div class="line">        mCalculateStrategy = calculateStrategy;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">double</span> <span class="title">calculatePrice</span><span class="params">(<span class="keyword">int</span> km)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (mCalculateStrategy != <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">return</span> mCalculateStrategy.calculatePrice(km);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>坐BRT太拥挤了，打的跟快车又太贵了，不能太经常坐啊，那么有没有既舒适又实惠的出行方式，当然是选择顺风车啦。同样的，新建一个顺风车策略类实现CalculateStrategy接口就可以了，是不是很方便呢？</p>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>由以上分析可以明显看出来。前者是通过if else 来实现，类型单一，实现起来较为简单。但是逻辑较为复杂，代码臃肿，难以维护。后者是通过实现策略接口，通过不同的策略做替换，简化逻辑，方便扩展，适用了较为复杂的逻辑业务。</p>
+<p>欢迎加我微信一起探讨交流</p>
+<p><img src="../image/wechat.jpg" alt="avatar"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://www.jianpan666.cn/2017/04/16/设计模式第五篇之策略模式/" data-id="cj8wi0m9e00067tyz1o4d4yk7" class="article-share-link">Share</a>
+      <a data-url="https://www.jianpan666.cn/2017/04/16/设计模式第五篇之策略模式/" data-id="cj9vedpy600047gfyeaf3ee5g" class="article-share-link">Share</a>
       
       
     </footer>
@@ -188,7 +192,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
     </div>
   </div>
 
@@ -199,6 +203,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/09/24/启动优化/">启动优化</a>
+          </li>
         
           <li>
             <a href="/2017/08/06/临时性内存泄露分析/">Handler临时性内存泄露分析</a>
@@ -214,10 +222,6 @@
         
           <li>
             <a href="/2017/03/18/设计模式第三篇之状态模式/">设计模式第三篇之状态模式</a>
-          </li>
-        
-          <li>
-            <a href="/2017/02/14/设计模式第二篇之享元模式/">设计模式第二篇之享元模式</a>
           </li>
         
       </ul>

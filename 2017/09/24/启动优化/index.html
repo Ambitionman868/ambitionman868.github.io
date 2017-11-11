@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>启动优化 | Hello 键盘</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="随着应用的功能越来越复杂，随着功能的需要，在APP启动的时候需要初始化的工作越来越多，启动速度严重受到影响，点击桌面图标后延迟启动，在低端的手机上给用户感觉没有启动，出现假死的现象，又或者经常出现黑白屏的情况，给人体验太不友好了。那怎么办呢？优化呗，从哪开始？请看以下分解。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="启动优化">
+<meta property="og:url" content="https://www.jianpan666.cn/2017/09/24/启动优化/index.html">
+<meta property="og:site_name" content="Hello 键盘">
+<meta property="og:description" content="随着应用的功能越来越复杂，随着功能的需要，在APP启动的时候需要初始化的工作越来越多，启动速度严重受到影响，点击桌面图标后延迟启动，在低端的手机上给用户感觉没有启动，出现假死的现象，又或者经常出现黑白屏的情况，给人体验太不友好了。那怎么办呢？优化呗，从哪开始？请看以下分解。">
+<meta property="og:updated_time" content="2017-11-11T13:58:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="启动优化">
+<meta name="twitter:description" content="随着应用的功能越来越复杂，随着功能的需要，在APP启动的时候需要初始化的工作越来越多，启动速度严重受到影响，点击桌面图标后延迟启动，在低端的手机上给用户感觉没有启动，出现假死的现象，又或者经常出现黑白屏的情况，给人体验太不友好了。那怎么办呢？优化呗，从哪开始？请看以下分解。">
+  
+    <link rel="alternate" href="/atom.xml" title="Hello 键盘" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hello 键盘</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">越努力 越幸运</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://www.jianpan666.cn"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-启动优化" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/24/启动优化/" class="article-date">
+  <time datetime="2017-09-24T12:48:03.000Z" itemprop="datePublished">2017-09-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      启动优化
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>随着应用的功能越来越复杂，随着功能的需要，在APP启动的时候需要初始化的工作越来越多，启动速度严重受到影响，点击桌面图标后延迟启动，在低端的手机上给用户感觉没有启动，出现假死的现象，又或者经常出现黑白屏的情况，给人体验太不友好了。那怎么办呢？优化呗，从哪开始？请看以下分解。</p>
+<a id="more"></a>
+<h3 id="1-应用启动流程"><a href="#1-应用启动流程" class="headerlink" title="1 应用启动流程"></a>1 应用启动流程</h3><p>首先Android系统的安装包本身是一个将组件和资源打包成APK格式的文件，APK文件通常运行在一个独立的进程中，也可以产生多个进程，甚至还可以多个APK文件运行在同一个进程中，可以有不同的实现方式。</p>
+<ol>
+<li>每个应用只有唯一的一个Application对象,并且在应用启动的时候一定会产生一个Application对象；</li>
+<li>Activity是Android应用程序的可视化组件之一，因此我们必须熟悉这两个对象的工作流程和生命周期才能够分析启动的性能；</li>
+</ol>
+<h4 id="1-1-先来谈谈Application"><a href="#1-1-先来谈谈Application" class="headerlink" title="1.1 先来谈谈Application"></a>1.1 先来谈谈Application</h4><p>Application是Android系统中的一个系统组件，每当APP启动的时候，系统就会创建一个Application对象，用来存储系统的一些信息。Android系统会自动在每个程序运行时创建一个Application对象，并且只有一个，可以看做是一个单例类。</p>
+<p>一般在开发中都会创建一个继承于Application的类并初始化一些功能，比如文件创建，数据库操作，一些重要数据获取等，记得在AndroidManefest.xml文件中注册。启动Application后，它的生命周期是整个中最长的，它的生命周期就等于这个应用程序的生命周期，因此，Application启动时初始化的变量是全局变量，同一个应用中的所有Activity，Service中都可以获取到这些值。这说明在Android中想要存储长久的数据除了用静态变量外还可以用Application，但并不建议使用过多的全局变量。</p>
+<h4 id="1-2-简单聊聊Activity"><a href="#1-2-简单聊聊Activity" class="headerlink" title="1.2 简单聊聊Activity"></a>1.2 简单聊聊Activity</h4><p>Activity相信大家都很熟悉了，启动Application的时候，系统会创建一个PID，即PID进程，所有的Activity都会在此进程上运行。还有它的生命周期，这在启动优化过程中非常重要。每个APP都会包含多个不同的Activity，用户可以通过Activity做不同的交互操作。在创建Activity时会调用onCreate()的方法创建Activity的每个新实例，在Activity的生命周期中只需要出现一次基本应用启动逻辑。在onCreate()方法中加载XML布局文件，定义成员方法，初始化UI等操作。</p>
+<p>因此可以得出应用启动流程，其中分为2类：冷启动和热启动。                                                                                   冷启动：系统会新建一个进程分配给它，会先创建和初始化Application类，再创建和初始化Activity类。              热启动：因为进程已经存在，所以不会再创建和初始化Application，而是直接创建和初始化Activity类。</p>
+<h4 id="综上"><a href="#综上" class="headerlink" title="综上"></a>综上</h4><p>清楚了Application跟Activity的关系之后再来谈谈启动优化。在Android应用开发中，启动速度对用户体验非常重要，也是一个APP给用户第一个性能方面的体验，启动速度块会给用户感觉很流畅。启动优化的的核心就是要快，尽量少做事。由以上分析可以知道，启动主要在做2件事：启动数据准备，加载UI布局显示，我们从启动耗时最多的数据准备以及UI布局绘制两个方向优化，达到降低启动耗时的目的。</p>
+<h5 id="优化一、-启动数据准备优化"><a href="#优化一、-启动数据准备优化" class="headerlink" title="优化一、 启动数据准备优化"></a>优化一、 启动数据准备优化</h5><p>随着不断迭代升级，APP的功能越发复杂，涉及到的模块越多，包括服务，进程，建库建表，本地存储，网络模块，底层数据的初始化等等，这些数据操作就要提前准备好的，可以分为以下几个维度来做分类启动优化：</p>
+<p>分步加载：拆分任务，优先级高的放前面                                                                                                                        异步加载：耗时且必须的异步化                                                                                                                                          延时加载：耗时非必须数据延时，用到再加载</p>
+<h5 id="优化二、UI布局优化"><a href="#优化二、UI布局优化" class="headerlink" title="优化二、UI布局优化"></a>优化二、UI布局优化</h5><p>正常来说APP启动过程是这样：启动应用→Application初始化→LaunchActivity→MainActivity。LaunchActivity是应用的启动页，启动页大部分APP当做广告页面来使用，其次，启动页会停留几秒的时间，这段时间可以做很多事情，网络请求等。布局优化是为了提高显示的效率，主要有：减少布局层级，避免过度绘制，添加自定义Theme解决启动短暂黑白屏问题。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://www.jianpan666.cn/2017/09/24/启动优化/" data-id="cj9vedpy300017gfy3oxxk641" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/08/06/临时性内存泄露分析/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Handler临时性内存泄露分析</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+ 
+
+
+
+
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-启动优化" data-title="启动优化" data-url="https://www.jianpan666.cn/2017/09/24/启动优化/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'ambitionman868'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';
+        ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/09/24/启动优化/">启动优化</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/06/临时性内存泄露分析/">Handler临时性内存泄露分析</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/16/设计模式第五篇之策略模式/">设计模式第五篇之策略模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/19/设计模式第四篇之建造者模式/">设计模式第四篇之建造者模式</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/18/设计模式第三篇之状态模式/">设计模式第三篇之状态模式</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Jianpan<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
